@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Mario Pinball Land (Gameboy Advance)</title>
+
+    <!-- Required WebComponent Polyfills & Custom Element Definitions -->
+    <script src="https://archive.org/components/npm/lit/polyfill-support.js?v=e7566976" type="text/javascript"></script>
+    <script src="https://archive.org/components/npm/@webcomponents/webcomponentsjs/webcomponents-bundle.js?v=e7566976" type="text/javascript"></script>
+    <script>
+      window.__realDefine = customElements.define.bind(customElements);
+      customElements.define = function() {
+        try {
+          return window.__realDefine.apply(this, arguments);
+        } catch (e) {
+          console.warn(e);
+        }
+      }
+    </script>
+
+    <!-- Core Emulation Engine Scripts & Styles -->
+    <script src="https://archive.org/includes/build/js/emulation.min.js?v=e7566976" type="text/javascript"></script>
+    <script src="https://archive.org/services/emularity/engine/browserfs.min.js?v=e7566976" type="text/javascript"></script>
+    <link href="https://archive.org/includes/build/css/archive.min.css?v=e7566976" rel="stylesheet" type="text/css"/>
+
+    <style>
+      body {
+        background-color: #000;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      :-webkit-full-screen {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100% !important;
+        height: 100% !important;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="theatre-ia-wrap" class="js-playset-list">
+      <div id="theatre-ia">
+        
+        <!-- Emulator Controls (Fullscreen & Mute) -->
+        <div id="theatre-controls">
+          <a href="#" id="gofullscreen" aria-label="Fullscreen view">
+            <div class="iconochive-fullscreen js-emulation-fullscreen" title="fullscreen view"></div>
+          </a>
+          <a href="#" class="js-play8-mute-click js-emulation-mute-click" aria-label="Click to mute">
+            <div class="iconochive-unmute" style="display:none" title="sound is on. click to mute sound."></div>
+          </a>
+          <a href="#" aria-label="Click for sound">
+            <div class="iconochive-mute js-play8-mute-click js-emulation-mute-click" style="display:none" title="sound is off. click for sound."></div>
+          </a>
+        </div>
+
+        <!-- Emulator Start Screen & Canvas -->
+        <div id="emulate">
+          <center class="posrel">
+            <a id="jsmessSS" href="#loading" class="js-emulation-emulate">
+              <div id="screenshot">
+                <img src="https://archive.org/serve/pinball_mario/pinball_mario_screenshot.gif" alt="[screenshot]"/>
+              </div>
+              <img class="ghost" src="https://archive.org/images/start.png" title="Click to Begin">
+            </a>
+            <div id="canvasholder">
+              <canvas id="canvas" style="width:560px;height:384px"></canvas>
+              <div id="gamepadtext"></div>
+            </div>
+          </center>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Hidden Configuration Input Required by emulation.min.js -->
+    <input class="js-emulation" type="hidden" value='{"url":"https://archive.org/stream/pinball_mario?module=gba","identifier":"pinball_mario","module":"gba","screenshot":"https://archive.org/serve/pinball_mario/pinball_mario_screenshot.gif"}'/>
+  </body>
+</html>
